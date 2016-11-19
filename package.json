@@ -1,0 +1,31 @@
+{
+  "name": "zabbix-promise",
+  "version": "1.0.0",
+  "description": "Simplified Zabbix API Client with Promise support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumitgoelpw/zabbix-promise.git"
+  },
+  "keywords": [
+    "Zabbix"
+  ],
+  "author": "Sumit Goel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumitgoelpw/zabbix-promise/issues"
+  },
+  "homepage": "https://github.com/sumitgoelpw/zabbix-promise#readme",
+  "dependencies": {
+    "request": "2.79.0",
+    "request-promise-native": "1.0.3",
+    "uuid": "3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "3.10.2",
+    "jsdoc": "3.4.3"
+  }
+}
