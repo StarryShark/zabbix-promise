@@ -1,10 +1,11 @@
 {
   "name": "zabbix-promise",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simplified Zabbix API Client with Promise support",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
   "keywords": [
     "Zabbix"
   ],
-  "author": "Sumit Goel",
+  "author": "Sumit Goel <sumit@goel.pw>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sumitgoelpw/zabbix-promise/issues"
@@ -21,11 +22,12 @@
   "homepage": "https://github.com/sumitgoelpw/zabbix-promise#readme",
   "dependencies": {
     "request": "2.79.0",
-    "request-promise-native": "1.0.3",
-    "uuid": "3.0.0"
+    "request-promise-native": "1.0.3"
   },
   "devDependencies": {
     "eslint": "3.10.2",
-    "jsdoc": "3.4.3"
+    "jsdoc": "3.4.3",
+    "chai": "*",
+    "mocha": "*"
   }
 }

@@ -7,6 +7,7 @@ const req = require('./lib/wrapper');
  * Variables
  */
 const HTTPOK = 200;
+const INDEX = 0;
 
 class Client {
 
@@ -30,10 +31,23 @@ class Client {
   static reqValidation (value) {
 
     let retValue = value;
+    const result = value.body.result;
 
-    if (value.statusCode === HTTPOK && value.body.result) {
+    if (value.statusCode === HTTPOK && result) {
 
-      retValue = value.body.result;
+      if (Array.isArray(result) && result.length > INDEX) {
+
+        retValue = result;
+
+      } else if (typeof result === 'string') {
+
+        retValue = result;
+
+      } else {
+
+        retValue = value;
+
+      }
 
     }
 
@@ -50,6 +64,7 @@ class Client {
 
     const opts = {
       'id': this.rpcid += 1,
+      'uri': this.url,
       'auth': this.authid,
       'method': 'user.login',
       'params': {
@@ -81,6 +96,7 @@ class Client {
 
     const opts = {
       'id': this.rpcid += 1,
+      'uri': this.url,
       'auth': this.authid,
       method,
       params
