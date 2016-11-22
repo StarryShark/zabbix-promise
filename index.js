@@ -183,6 +183,59 @@ class Zabbix {
     return this.request('host.massremove', params);
 
   } // eslint: massRemoveHost
+
+  // -------------------------------------
+  // Functions for working with items.
+  // -------------------------------------
+
+  /**
+   * This method allows to create new items.
+   *
+   * @param {Object} params - parameters that will be passed to the API method.
+   * @returns {Promise} a promise which resolves to the http response.
+   */
+  createItem (params) {
+
+    return this.request('item.create', params);
+
+  } // eslint: createItem
+
+  /**
+   * This method allows to update existing items.
+   *
+   * @param {Object} params - parameters that will be passed to the API method.
+   * @returns {Promise} a promise which resolves to the http response.
+   */
+  updateItem (params) {
+
+    return this.request('item.update', params);
+
+  } // eslint: updateItem
+
+  /**
+   * The method allows to retrieve items according to the given parameters.
+   *
+   * @param {Object} params - parameters that will be passed to the API method.
+   * @returns {Promise} a promise which resolves to the http response.
+   */
+  getItem (params) {
+
+    return this.request('item.get', params);
+
+  } // eslint: getItem
+
+  /**
+   * This method allows to delete items.
+   *
+   * @param {Object} params - parameters that will be passed to the API method.
+   * @returns {Promise} a promise which resolves to the http response.
+   */
+  deleteItem (params) {
+
+    return this.request('item.delete', params);
+
+  } // eslint: deleteItem
+
 } // eslint: class
 
 module.exports = Zabbix;

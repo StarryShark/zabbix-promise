@@ -90,6 +90,48 @@ Remove related objects from multiple hosts
 
 **Returns**: `Promise`, a promise which resolves to the http response.
 
+### Zabbix.createItem(params)
+
+This method allows to create new items.
+
+**Parameters**
+
+**params**: `Object`, parameters that will be passed to the API method.
+
+**Returns**: `Promise`, a promise which resolves to the http response.
+
+### Zabbix.updateItem(params)
+
+This method allows to update existing items.
+
+**Parameters**
+
+**params**: `Object`, parameters that will be passed to the API method.
+
+**Returns**: `Promise`, a promise which resolves to the http response.
+
+### Zabbix.getItem(params)
+
+The method allows to retrieve items according to the given parameters.
+
+**Parameters**
+
+**params**: `Object`, parameters that will be passed to the API method.
+
+**Returns**: `Promise`, a promise which resolves to the http response.
+
+### Zabbix.deleteItem(params)
+
+This method allows to delete items.
+
+**Parameters**
+
+**params**: `Object`, parameters that will be passed to the API method.
+
+**Returns**: `Promise`, a promise which resolves to the http response.
+
+
+
 * * *
 
 *Copyright (c) 2016 Sumit Goel*
