@@ -28,6 +28,10 @@ zabbix.login()
   );
 ```
 
+## Documentation
+
+- [API Docs](docs/index.md)
+
 ## Examples
 
 - [getHosts](examples/getHosts.js)

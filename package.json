@@ -4,16 +4,22 @@
   "description": "Simplified Zabbix API Client with Promise support",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "doc": "./node_modules/.bin/jsdox -o docs index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sumitgoelpw/zabbix-promise.git"
   },
   "keywords": [
-    "Zabbix"
+    "Zabbix",
+    "API"
   ],
-  "author": "Sumit Goel <sumit@goel.pw>",
+  "author": {
+    "name": "Sumit Goel",
+    "email": "sumit@goel.pw",
+    "url": "https://sumit.goel.pw"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sumitgoelpw/zabbix-promise/issues"
@@ -24,9 +30,9 @@
     "request-promise-native": "1.0.3"
   },
   "devDependencies": {
+    "chai": "3.5.0",
     "eslint": "3.10.2",
-    "jsdoc": "3.4.3",
-    "chai": "*",
-    "mocha": "*"
+    "jsdox": "0.4.10",
+    "mocha": "3.1.2"
   }
 }
