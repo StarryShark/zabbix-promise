@@ -12,15 +12,15 @@ Interact with the [Zabbix](https://www.zabbix.com/documentation/3.0/manual/api) 
 const Zabbix = require('zabbix-promise');
 
 const zabbix = new Zabbix(
-  'http://zabbix.example.com/zabbix/api_jsonrpc.php',
-  'username',
-  'password'
+  'http://127.0.0.1:8080/api_jsonrpc.php',
+  'Admin',
+  'zabbix'
 );
 
 zabbix.login()
-  .then(() => zabbix.request('host.get', {
-    'groupids': '247',
-    'output': ['hostid', 'host']
+  .then(() => zabbix.getHost({
+    'output': ['hostid', 'host'],
+    'limit': 1
   }))
   .then((value) => console.log(JSON.stringify(value, null, 2)))
   .catch((reason) =>
@@ -34,4 +34,9 @@ zabbix.login()
 
 ## Examples
 
-- [getHosts](examples/getHosts.js)
+- [getHost](examples/getHost.js)
+
+## Testing
+
+1. `docker-compose up`
+2. `npm test`

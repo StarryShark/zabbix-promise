@@ -33,28 +33,33 @@ class Zabbix {
 
   static reqValidation (value) {
 
-    let retValue = value;
-    const result = value.body.result;
+    return new Promise((resolve, reject) => {
 
-    if (value.statusCode === HTTPOK && result) {
+      const result = value.body.result;
 
-      if (Array.isArray(result) && result.length > INDEX) {
+      if (value.statusCode === HTTPOK && result) {
 
-        retValue = result;
+        // eslint-disable-next-line no-extra-parens
+        if ((Array.isArray(result) && result.length > INDEX) ||
+          typeof result === 'string') {
 
-      } else if (typeof result === 'string') {
+          resolve(result);
 
-        retValue = result;
+        } else {
+
+          reject(value);
+
+        }
 
       } else {
 
-        retValue = value;
+        reject(value);
 
       }
 
-    }
 
-    return retValue;
+    });
+
 
   } // eslint: reqValidation
 
@@ -84,7 +89,6 @@ class Zabbix {
       'user': this.user,
       'password': this.password
     })
-      .then((value) => this.constructor.reqValidation(value))
       .then((value) => {
 
         this.authid = value;

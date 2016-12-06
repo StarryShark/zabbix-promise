@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
-    "doc": "./node_modules/.bin/jsdox -o docs index.js"
+    "doc": "./node_modules/.bin/jsdox -o docs index.js",
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -30,9 +31,10 @@
     "request-promise-native": "1.0.3"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "eslint": "3.10.2",
-    "jsdox": "0.4.10",
-    "mocha": "3.1.2"
+    "chai": "*",
+    "chai-as-promised": "*",
+    "eslint": "*",
+    "jsdox": "*",
+    "mocha": "*"
   }
 }
