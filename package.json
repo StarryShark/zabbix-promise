@@ -6,7 +6,12 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "doc": "./node_modules/.bin/jsdox -o docs index.js",
-    "test": "./node_modules/.bin/mocha"
+    "pretest": "npm run lint",
+    "test": "./node_modules/.bin/mocha",
+    "posttest": "npm run snyk",
+    "update": "./node_modules/.bin/ncu -u",
+    "snyk": "./node_modules/.bin/snyk test --file=package.json",
+    "commit": "./node_modules/.bin/git-cz"
   },
   "repository": {
     "type": "git",
@@ -31,10 +36,23 @@
     "request-promise-native": "1.0.3"
   },
   "devDependencies": {
-    "chai": "*",
-    "chai-as-promised": "*",
-    "eslint": "*",
-    "jsdox": "*",
-    "mocha": "*"
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "commitizen": "2.9.5",
+    "cz-conventional-changelog": "1.2.0",
+    "eslint": "3.13.1",
+    "eslint-config-sumitgoelpw": "1.0.1",
+    "jsdox": "0.4.10",
+    "mocha": "3.2.0",
+    "npm-check-updates": "2.8.9",
+    "snyk": "1.23.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "eslintConfig": {
+    "extends": "sumitgoelpw"
   }
 }

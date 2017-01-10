@@ -35,7 +35,7 @@ class Zabbix {
 
     return new Promise((resolve, reject) => {
 
-      const result = value.body.result;
+      const {result} = value.body;
 
       if (value.statusCode === HTTPOK && result) {
 
