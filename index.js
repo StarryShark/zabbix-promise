@@ -41,6 +41,7 @@ class Zabbix {
 
         // eslint-disable-next-line no-extra-parens
         if ((Array.isArray(result) && result.length > INDEX) ||
+          (Object.prototype.toString.call(result) === '[object Object]' && Object.keys(result).length > INDEX) ||
           typeof result === 'string') {
 
           resolve(result);
