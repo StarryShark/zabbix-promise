@@ -8,13 +8,19 @@ services:
   - docker
 
 before_install:
-  - docker-compose --version
-  - docker-compose up -d
-  - docker-compose ps
+  - npm install -g npm@latest
+  - docker-compose -f docker-compose-30.yml up -d
+  - docker-compose -f docker-compose-30.yml ps
 
 install:
   - yarn
 
 script:
   - npm test
-  - docker-compose down
+  - docker-compose -f docker-compose-30.yml down
+  - docker-compose -f docker-compose-32.yml up -d
+  - docker-compose -f docker-compose-32.yml ps
+
+after_success:
+  - npm test
+  - docker-compose -f docker-compose-32.yml down
