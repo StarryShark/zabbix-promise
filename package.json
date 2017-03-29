@@ -8,9 +8,9 @@
     "doc": "./node_modules/.bin/jsdox -o docs index.js",
     "pretest": "npm run lint",
     "test": "./node_modules/.bin/mocha",
-    "posttest": "npm run snyk",
-    "update": "./node_modules/.bin/ncu -u",
-    "snyk": "./node_modules/.bin/snyk test --file=package.json",
+    "posttest": "npm run nsp",
+    "update": "./node_modules/.bin/ncu -u && rm -rf ./node_modules yarn.lock && yarn",
+    "nsp": "./node_modules/.bin/nsp check",
     "commit": "./node_modules/.bin/git-cz"
   },
   "repository": {
@@ -32,20 +32,20 @@
   },
   "homepage": "https://github.com/sumitgoelpw/zabbix-promise#readme",
   "dependencies": {
-    "request": "2.79.0",
+    "request": "2.81.0",
     "request-promise-native": "1.0.3"
   },
   "devDependencies": {
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
-    "commitizen": "2.9.5",
-    "cz-conventional-changelog": "1.2.0",
-    "eslint": "3.13.1",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.0.0",
+    "eslint": "3.18.0",
     "eslint-config-sumitgoelpw": "1.0.1",
     "jsdox": "0.4.10",
     "mocha": "3.2.0",
-    "npm-check-updates": "2.8.9",
-    "snyk": "1.23.3"
+    "npm-check-updates": "2.10.4",
+    "nsp": "2.6.3"
   },
   "config": {
     "commitizen": {

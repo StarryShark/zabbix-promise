@@ -26,3 +26,24 @@ services:
     depends_on:
       - zabbix-server
       - zabbix-database
+  zabbix-agent1:
+    image: zabbix/zabbix-agent:${ZABTAG}
+    environment:
+      ZBX_HOSTNAME: zabbix-agent1
+      ZBX_SERVER_HOST: zabbix-server
+    depends_on:
+      - zabbix-server
+  zabbix-agent2:
+    image: zabbix/zabbix-agent:${ZABTAG}
+    environment:
+      ZBX_HOSTNAME: zabbix-agent2
+      ZBX_SERVER_HOST: zabbix-server
+    depends_on:
+      - zabbix-server
+  zabbix-agent3:
+    image: zabbix/zabbix-agent:${ZABTAG}
+    environment:
+      ZBX_HOSTNAME: zabbix-agent3
+      ZBX_SERVER_HOST: zabbix-server
+    depends_on:
+      - zabbix-server

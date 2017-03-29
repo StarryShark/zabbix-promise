@@ -1,7 +1,7 @@
 /**
  * @overview Interact with the Zabbix API using `zabbix-promise` and ES2015
  * native promises.
- * @copyright Copyright (c) 2016 Sumit Goel
+ * @copyright Copyright (c) 2016-present Sumit Goel
  * @license MIT
  * @author Sumit Goel <sumit@goel.pw>
  */
@@ -9,7 +9,6 @@
 const req = require('./lib/wrapper');
 
 const HTTPOK = 200;
-const INDEX = 0;
 
 
 class Zabbix {
@@ -39,21 +38,11 @@ class Zabbix {
 
       if (value.statusCode === HTTPOK && result) {
 
-        // eslint-disable-next-line no-extra-parens
-        if ((Array.isArray(result) && result.length > INDEX) ||
-          typeof result === 'string') {
-
-          resolve(result);
-
-        } else {
-
-          reject(value);
-
-        }
+        resolve(result);
 
       } else {
 
-        reject(value);
+        reject(value.body);
 
       }
 
