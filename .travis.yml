@@ -7,20 +7,18 @@ node_js:
 services:
   - docker
 
-before_install:
-  - npm install -g npm@latest
-  - docker-compose -f docker-compose-30.yml up -d
-  - docker-compose -f docker-compose-30.yml ps
-
 install:
+  - npm install -g npm@latest
   - yarn
 
 script:
+  - docker-compose -f docker-compose-30.yml up -d
+  - sleep 30
+  - docker-compose -f docker-compose-30.yml ps
   - npm test
   - docker-compose -f docker-compose-30.yml down
   - docker-compose -f docker-compose-32.yml up -d
+  - sleep 30
   - docker-compose -f docker-compose-32.yml ps
-
-after_success:
   - npm test
   - docker-compose -f docker-compose-32.yml down
