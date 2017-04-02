@@ -4,13 +4,9 @@
   "description": "Simplified Zabbix API Client with Promise support",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint .",
     "doc": "./node_modules/.bin/jsdox -o docs index.js",
-    "pretest": "npm run lint",
-    "test": "./node_modules/.bin/mocha",
-    "posttest": "npm run nsp",
+    "test": "bash ./tasks/test.sh",
     "update": "./node_modules/.bin/ncu -u && rm -rf ./node_modules yarn.lock && yarn",
-    "nsp": "./node_modules/.bin/nsp check",
     "commit": "./node_modules/.bin/git-cz"
   },
   "repository": {
@@ -40,7 +36,7 @@
     "chai-as-promised": "6.0.0",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.0.0",
-    "eslint": "3.18.0",
+    "eslint": "3.19.0",
     "eslint-config-sumitgoelpw": "1.0.1",
     "jsdox": "0.4.10",
     "mocha": "3.2.0",

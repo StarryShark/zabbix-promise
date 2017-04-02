@@ -2,7 +2,9 @@ sudo: required
 
 language: node_js
 node_js:
+  - "4"
   - "6"
+  - "7"
 
 services:
   - docker
@@ -12,13 +14,4 @@ install:
   - yarn
 
 script:
-  - docker-compose -f docker-compose-30.yml up -d
-  - sleep 30
-  - docker-compose -f docker-compose-30.yml ps
-  - npm test
-  - docker-compose -f docker-compose-30.yml down
-  - docker-compose -f docker-compose-32.yml up -d
-  - sleep 30
-  - docker-compose -f docker-compose-32.yml ps
-  - npm test
-  - docker-compose -f docker-compose-32.yml down
+  - bash ./tasks/test.sh
