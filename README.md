@@ -1,4 +1,4 @@
-# zabbix-promise
+# Zabbix API Client [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/849/badge)](https://bestpractices.coreinfrastructure.org/projects/849)
 
 Interact with the [Zabbix](https://www.zabbix.com/documentation/3.0/manual/api) API using `zabbix-promise` and ES2015 native promises.
 
