@@ -15,9 +15,7 @@
     "API"
   ],
   "author": {
-    "name": "Sumit Goel",
-    "email": "sumit@goel.pw",
-    "url": "https://sumit.goel.pw"
+    "name": "Sumit Goel"
   },
   "license": "MIT",
   "bugs": {
@@ -31,9 +29,12 @@
   "devDependencies": {
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
+    "coveralls": "2.13.1",
     "eslint": "3.19.0",
     "eslint-config-sumitgoelpw": "1.0.1",
+    "istanbul": "0.4.5",
     "mocha": "3.3.0",
+    "mocha-lcov-reporter": "1.3.0",
     "nsp": "2.6.3"
   },
   "eslintConfig": {

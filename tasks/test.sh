@@ -18,7 +18,14 @@ do
   docker-compose -p "$VAR" up -d
   sleep 30
   docker-compose -p "$VAR" ps
-  mocha
+
+  if "$TRAVIS"; then
+    istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | \
+      ./node_modules/.bin/coveralls && rm -rf ./coverage
+  else
+    istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
+  fi
+
   docker-compose -p "$VAR" down
 done
 
