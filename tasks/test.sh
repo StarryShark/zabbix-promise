@@ -1,25 +1,26 @@
-#!/usr/bin/env
+#!/bin/bash
 
 set -ev
 
 export PATH="./node_modules/.bin:$PATH"
 
+export DBUSER='postgres'
+export DBPASS='postgres'
+export HOSTPORT='8080'
+
 # linting check
 eslint .
 
-# run tests for zabbix 3.0
-docker-compose -f docker-compose-30.yml up -d
-sleep 30
-docker-compose -f docker-compose-30.yml ps
-mocha
-docker-compose -f docker-compose-30.yml down
-
-# run tests for zabbix 3.2
-docker-compose -f docker-compose-32.yml up -d
-sleep 30
-docker-compose -f docker-compose-32.yml ps
-mocha
-docker-compose -f docker-compose-32.yml down
+# run tests for zabbix
+for VAR in 'alpine-3.0-latest' 'alpine-3.2-latest'
+do
+  export ZABTAG="$VAR"
+  docker-compose -p "$VAR" up -d
+  sleep 30
+  docker-compose -p "$VAR" ps
+  mocha
+  docker-compose -p "$VAR" down
+done
 
 # vulnerability scanner
 nsp check

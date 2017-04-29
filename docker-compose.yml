@@ -6,7 +6,7 @@ services:
         POSTGRES_USER: ${DBUSER}
         POSTGRES_PASSWORD: ${DBPASS}
   zabbix-server:
-      image: zabbix/zabbix-server-pgsql:${ZABTAG32}
+      image: zabbix/zabbix-server-pgsql:${ZABTAG}
       environment:
         DB_SERVER_HOST: zabbix-database
         POSTGRES_USER: ${DBUSER}
@@ -14,7 +14,7 @@ services:
       depends_on:
         - zabbix-database
   zabbix-web:
-    image: zabbix/zabbix-web-nginx-pgsql:${ZABTAG32}
+    image: zabbix/zabbix-web-nginx-pgsql:${ZABTAG}
     ports:
       - ${HOSTPORT}:80/tcp
     environment:
@@ -27,21 +27,21 @@ services:
       - zabbix-server
       - zabbix-database
   zabbix-agent1:
-    image: zabbix/zabbix-agent:${ZABTAG32}
+    image: zabbix/zabbix-agent:${ZABTAG}
     environment:
       ZBX_HOSTNAME: zabbix-agent1
       ZBX_SERVER_HOST: zabbix-server
     depends_on:
       - zabbix-server
   zabbix-agent2:
-    image: zabbix/zabbix-agent:${ZABTAG32}
+    image: zabbix/zabbix-agent:${ZABTAG}
     environment:
       ZBX_HOSTNAME: zabbix-agent2
       ZBX_SERVER_HOST: zabbix-server
     depends_on:
       - zabbix-server
   zabbix-agent3:
-    image: zabbix/zabbix-agent:${ZABTAG32}
+    image: zabbix/zabbix-agent:${ZABTAG}
     environment:
       ZBX_HOSTNAME: zabbix-agent3
       ZBX_SERVER_HOST: zabbix-server
