@@ -39,7 +39,7 @@ describe('host actions:', () => {
 
   hosts.forEach((host) => {
 
-    it(`create host ${host.name}`, () => expect(zabbix.createHost({
+    it(`create host ${host.name}`, () => expect(zabbix.request('host.create', {
       'host': host.name,
       'groups': [{'groupid': host.gid}],
       'interfaces': [
@@ -63,13 +63,13 @@ describe('host actions:', () => {
   });
 
   it(`update host ${hosts[0].name}`, () => expect(
-    zabbix.updateHost({
+    zabbix.request('host.update', {
       'hostid': hosts[0].id,
       'templates': [{'templateid': hosts[0].tid}],
       'inventory_mode': 1
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
-  it(`get host ${hosts[0].name}`, () => expect(zabbix.getHost({
+  it(`get host ${hosts[0].name}`, () => expect(zabbix.request('host.get', {
     'output': [
       'hostid',
       'host'
@@ -78,7 +78,7 @@ describe('host actions:', () => {
   })).to.be.fulfilled.and.to.eventually.be.an('Array'));
 
   it(`add template to ${hosts[1].name}, ${hosts[2].name}`, () => expect(
-    zabbix.massAddHost({
+    zabbix.request('host.massadd', {
       'hosts': [
         {'hostid': hosts[1].id},
         {'hostid': hosts[2].id}
@@ -87,7 +87,7 @@ describe('host actions:', () => {
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   it(`update inventory contact ${hosts[1].name}, ${hosts[2].name}`,
-    () => expect(zabbix.massUpdateHost({
+    () => expect(zabbix.request('host.massupdate', {
       'hosts': [
         {'hostid': hosts[1].id},
         {'hostid': hosts[2].id}
@@ -97,7 +97,7 @@ describe('host actions:', () => {
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   it(`unlink and clear template from ${hosts[1].name}, ${hosts[2].name}`,
-    () => expect(zabbix.massRemoveHost({
+    () => expect(zabbix.request('host.massremove', {
       'hostids': [
         hosts[1].id,
         hosts[2].id
@@ -108,7 +108,7 @@ describe('host actions:', () => {
   hosts.forEach((host) => {
 
     it(`delete host ${host.name}`, () => expect(
-      zabbix.deleteHost([host.id]))
+      zabbix.request('host.delete', [host.id]))
       .to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   });
