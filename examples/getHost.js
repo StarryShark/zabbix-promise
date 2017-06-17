@@ -9,7 +9,10 @@ const zabbix = new Zabbix(
 
 zabbix.login()
   .then(() => zabbix.getHost({
-    'output': ['hostid', 'host'],
+    'output': [
+      'hostid',
+      'host'
+    ],
     'limit': 1
   }))
   .then((value) => console.log(JSON.stringify(value, null, whiteSpaceCount)))
