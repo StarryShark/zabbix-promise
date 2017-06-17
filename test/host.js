@@ -42,14 +42,16 @@ describe('host actions:', () => {
     it(`create host ${host.name}`, () => expect(zabbix.createHost({
       'host': host.name,
       'groups': [{'groupid': host.gid}],
-      'interfaces': [{
-        'dns': host.name,
-        'ip': '',
-        'main': 1,
-        'port': '10050',
-        'type': 1,
-        'useip': 0
-      }]
+      'interfaces': [
+        {
+          'dns': host.name,
+          'ip': '',
+          'main': 1,
+          'port': '10050',
+          'type': 1,
+          'useip': 0
+        }
+      ]
     }).then((value) => {
 
       [host.id] = value.hostids;
@@ -68,26 +70,38 @@ describe('host actions:', () => {
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   it(`get host ${hosts[0].name}`, () => expect(zabbix.getHost({
-    'output': ['hostid', 'host'],
+    'output': [
+      'hostid',
+      'host'
+    ],
     'hostids': hosts[0].id
   })).to.be.fulfilled.and.to.eventually.be.an('Array'));
 
   it(`add template to ${hosts[1].name}, ${hosts[2].name}`, () => expect(
     zabbix.massAddHost({
-      'hosts': [{'hostid': hosts[1].id}, {'hostid': hosts[2].id}],
+      'hosts': [
+        {'hostid': hosts[1].id},
+        {'hostid': hosts[2].id}
+      ],
       'templates': [{'templateid': hosts[1].tid}]
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   it(`update inventory contact ${hosts[1].name}, ${hosts[2].name}`,
     () => expect(zabbix.massUpdateHost({
-      'hosts': [{'hostid': hosts[1].id}, {'hostid': hosts[2].id}],
+      'hosts': [
+        {'hostid': hosts[1].id},
+        {'hostid': hosts[2].id}
+      ],
       'inventory': {'contact': 'Sumit Goel'},
       'inventory_mode': 1
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   it(`unlink and clear template from ${hosts[1].name}, ${hosts[2].name}`,
     () => expect(zabbix.massRemoveHost({
-      'hostids': [hosts[1].id, hosts[2].id],
+      'hostids': [
+        hosts[1].id,
+        hosts[2].id
+      ],
       'templateids_clear': hosts[1].tid
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
@@ -95,7 +109,7 @@ describe('host actions:', () => {
 
     it(`delete host ${host.name}`, () => expect(
       zabbix.deleteHost([host.id]))
-    .to.be.fulfilled.and.to.eventually.be.an('Object'));
+      .to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   });
 

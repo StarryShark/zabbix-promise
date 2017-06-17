@@ -11,14 +11,16 @@ zabbix.login()
   .then(() => zabbix.createHost({
     'host': 'zabbix-agent1',
     'groups': [{'groupid': '2'}],
-    'interfaces': [{
-      'dns': 'zabbix-agent1',
-      'ip': '',
-      'main': 1,
-      'port': '10050',
-      'type': 1,
-      'useip': 0
-    }],
+    'interfaces': [
+      {
+        'dns': 'zabbix-agent1',
+        'ip': '',
+        'main': 1,
+        'port': '10050',
+        'type': 1,
+        'useip': 0
+      }
+    ],
     'templates': [{'templateid': '10001'}],
     'inventory_mode': 1
   }))
