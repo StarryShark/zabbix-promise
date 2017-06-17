@@ -18,7 +18,7 @@ const zabbix = new Zabbix(
 );
 
 zabbix.login()
-  .then(() => zabbix.getHost({
+  .then(() => zabbix.request('host.get', {
     'output': ['hostid', 'host'],
     'limit': 1
   }))
