@@ -8,7 +8,7 @@ const zabbix = new Zabbix(
 );
 
 zabbix.login()
-  .then(() => zabbix.createHost({
+  .then(() => zabbix.request('host.create', {
     'host': 'zabbix-agent1',
     'groups': [{'groupid': '2'}],
     'interfaces': [
