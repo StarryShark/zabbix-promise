@@ -19,7 +19,7 @@ do
   sleep 30
   docker-compose -p "$VAR" ps
 
-  if "$TRAVIS"; then
+  if [ "$CI" = 'true' ]; then
     istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | \
       ./node_modules/.bin/coveralls && rm -rf ./coverage
   else
