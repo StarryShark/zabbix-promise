@@ -1,3 +1,4 @@
+group: edge
 sudo: required
 
 language: node_js
