@@ -113,4 +113,7 @@ describe('host actions:', () => {
 
   });
 
+  it('logout', () => expect(zabbix.logout()).to.be.fulfilled
+    .and.to.eventually.be.a('boolean'));
+
 });
