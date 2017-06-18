@@ -21,14 +21,10 @@ do
 
   if [ "$CI" = 'true' ]; then
     istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
-    echo $?
-    coveralls -v < ./coverage/lcov.info
-    echo $?
+    coveralls < ./coverage/lcov.info
     rm -rf ./coverage
-    echo $?
   else
     istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
-    echo $?
   fi
 
   docker-compose -p "$VAR" down
