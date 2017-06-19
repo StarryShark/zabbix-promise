@@ -1,9 +1,9 @@
+group: edge
+
 sudo: required
 
 language: node_js
 node_js:
-  - "4"
-  - "5"
   - "6"
   - "7"
   - "8"
@@ -11,9 +11,17 @@ node_js:
 services:
   - docker
 
+addons:
+  apt:
+    packages:
+      - shellcheck
+
 install:
-  - npm install -g npm@latest
   - npm install
 
 script:
+  - shellcheck -s bash -Calways ./tasks/test.sh
   - bash ./tasks/test.sh
+
+matrix:
+  fast_finish: true

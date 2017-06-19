@@ -20,8 +20,9 @@ do
   docker-compose -p "$VAR" ps
 
   if [ "$CI" = 'true' ]; then
-    istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | \
-      ./node_modules/.bin/coveralls && rm -rf ./coverage
+    istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
+    coveralls < ./coverage/lcov.info
+    rm -rf ./coverage
   else
     istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
   fi

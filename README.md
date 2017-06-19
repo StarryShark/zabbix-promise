@@ -1,4 +1,4 @@
-# Zabbix API Client [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/849/badge)](https://bestpractices.coreinfrastructure.org/projects/849) [![Coverage Status](https://coveralls.io/repos/github/sumitgoelpw/zabbix-promise/badge.svg?branch=master)](https://coveralls.io/github/sumitgoelpw/zabbix-promise?branch=master)
+# Zabbix API Client [![Build Status](https://travis-ci.org/sumitgoelpw/zabbix-promise.svg?branch=master)](https://travis-ci.org/sumitgoelpw/zabbix-promise) [![Coverage Status](https://coveralls.io/repos/github/sumitgoelpw/zabbix-promise/badge.svg?branch=master)](https://coveralls.io/github/sumitgoelpw/zabbix-promise?branch=master) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/849/badge)](https://bestpractices.coreinfrastructure.org/projects/849)
 
 Interact with the [Zabbix](https://www.zabbix.com/documentation/3.0/manual/api) API using `zabbix-promise` and ES2015 native promises.
 

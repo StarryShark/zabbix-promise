@@ -25,6 +25,7 @@ zabbix.login()
     'inventory_mode': 1
   }))
   .then((value) => console.log(JSON.stringify(value, null, whiteSpaceCount)))
+  .then(() => zabbix.logout())
   .catch((reason) =>
     console.log(JSON.stringify(reason, null, whiteSpaceCount))
   );

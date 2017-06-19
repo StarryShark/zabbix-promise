@@ -4,6 +4,9 @@
   "description": "Simplified Zabbix API Client with Promise support",
   "main": "index.js",
   "scripts": {
+    "cb": "checkbashisms ./tasks/test.sh; exit 0",
+    "sc": "shellcheck -s bash -Calways ./tasks/test.sh",
+    "pretest": "npm run cb && npm run sc",
     "test": "bash ./tasks/test.sh"
   },
   "repository": {
