@@ -4,10 +4,13 @@
   "description": "Simplified Zabbix API Client with Promise support",
   "main": "index.js",
   "scripts": {
+    "build": "babel --presets 'flow' src/ -d lib/",
     "cb": "checkbashisms ./tasks/test.sh; exit 0",
     "sc": "shellcheck -s bash -Calways ./tasks/test.sh",
     "pretest": "npm run cb && npm run sc",
-    "test": "bash ./tasks/test.sh"
+    "test": "bash ./tasks/test.sh",
+    "up": "npm-check -u -E && rm -rf ./node_modules package-lock.json && npm i",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -30,17 +33,29 @@
     "request-promise-native": "1.0.4"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-preset-flow": "6.23.0",
     "chai": "4.0.2",
     "chai-as-promised": "7.0.0",
     "coveralls": "2.13.1",
     "eslint": "4.0.0",
     "eslint-config-sumitgoelpw": "1.0.5",
+    "eslint-plugin-flowtype": "2.34.0",
+    "flow-bin": "0.48.0",
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
     "mocha-lcov-reporter": "1.3.0",
+    "npm-check": "5.4.4",
     "nsp": "2.6.3"
   },
   "eslintConfig": {
-    "extends": "sumitgoelpw"
+    "extends": [
+      "plugin:flowtype/recommended",
+      "sumitgoelpw"
+    ],
+    "plugins": [
+      "flowtype"
+    ]
   }
 }

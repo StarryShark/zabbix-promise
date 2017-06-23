@@ -1,3 +1,5 @@
+// @flow
+
 const rp = require('request-promise-native');
 
 module.exports = {
@@ -9,7 +11,13 @@ module.exports = {
    *                      parameters properties
    * @returns {Promise} - A promise which resolves to the resource created.
    */
-  'post': opts => {
+  'post': (opts: {|
+      uri: string,
+      id: number,
+      auth: string | null,
+      method: string,
+      params: {} | []
+    |}) => {
 
     const options = {
       'method': 'POST',
@@ -27,5 +35,6 @@ module.exports = {
     };
 
     return rp.post(options);
+
   }
 };
