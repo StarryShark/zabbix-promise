@@ -1,10 +1,13 @@
+// @flow
+
 const Zabbix = require('./api');
 
 class Client extends Zabbix {
 
-  sendValues() {
+  sendValues () {
 
     console.log(`Coming soon... ${this.url}`);
+
   }
 
 }

@@ -1,8 +1,16 @@
+// @flow
+
 const req = require('./wrapper');
 
 const HTTPOK = 200;
 
 class Zabbix {
+
+  url: string
+  user: string
+  password: string
+  rpcid: number
+  authid: string | null
 
   /**
    * Zabbix API client class.
@@ -11,32 +19,39 @@ class Zabbix {
    * @param {string} user - login name.
    * @param {string} password - login password.
    */
-  constructor(url, user, password) {
+  constructor (url: string, user: string, password: string) {
 
     this.url = url;
     this.user = user;
     this.password = password;
     this.rpcid = 0;
     this.authid = null;
+
   } // eslint: constructor
 
-  static reqValidation(value) {
+  static reqValidation (value) {
 
     return new Promise((resolve, reject) => {
 
-      const { result } = value.body;
+      const {result} = value.body;
 
       if (value.statusCode === HTTPOK && result) {
 
         resolve(result);
+
       } else {
 
         reject(result);
+
       }
+
+
     });
+
+
   } // eslint: reqValidation
 
-  request(method, params) {
+  request (method: string, params: {} | []) {
 
     const opts = {
       'id': this.rpcid += 1,
@@ -46,7 +61,9 @@ class Zabbix {
       params
     };
 
-    return req.post(opts).then(value => this.constructor.reqValidation(value));
+    return req.post(opts)
+      .then((value) => this.constructor.reqValidation(value));
+
   } // eslint: request
 
   /**
@@ -55,21 +72,25 @@ class Zabbix {
    *
    * @returns {Promise} a promise which resolves to the http response.
    */
-  login() {
+  login () {
 
     return this.request('user.login', {
       'user': this.user,
       'password': this.password
-    }).then(value => {
+    })
+      .then((value) => {
 
-      if (typeof value === 'string' || value instanceof String) {
+        if (typeof value === 'string' || value instanceof String) {
 
-        this.authid = value;
-        return value;
-      }
+          this.authid = value;
+          return value;
 
-      throw value;
-    });
+        }
+
+        throw value;
+
+      });
+
   } // eslint: login
 
   /**
@@ -78,18 +99,22 @@ class Zabbix {
    *
    * @returns {Promise} a promise which resolves to the http response.
    */
-  logout() {
+  logout () {
 
-    return this.request('user.logout', []).then(value => {
+    return this.request('user.logout', [])
+      .then((value) => {
 
-      if (typeof value === 'boolean' && value) {
+        if (typeof value === 'boolean' && value) {
 
-        this.authid = null;
-        return value;
-      }
+          this.authid = null;
+          return value;
 
-      throw value;
-    });
+        }
+
+        throw value;
+
+      });
+
   } // eslint: logout
 
 } // eslint: class
