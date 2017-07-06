@@ -13,6 +13,7 @@ module.exports = {
    */
   'post': (opts: {|
       uri: string,
+      rejectUnauthorized: boolean,
       id: number,
       auth: string | null,
       method: string,
@@ -23,6 +24,8 @@ module.exports = {
       'method': 'POST',
       'uri': opts.uri,
       'json': true,
+      'gzip': true,
+      'rejectUnauthorized': opts.rejectUnauthorized,
       'simple': false,
       'resolveWithFullResponse': true,
       'body': {

@@ -9,6 +9,7 @@ class Zabbix {
   url: string
   user: string
   password: string
+  rejectUnauthorized: boolean
   rpcid: number
   authid: string | null
 
@@ -18,12 +19,15 @@ class Zabbix {
    * @param {string} url - Zabbix API endpoint.
    * @param {string} user - login name.
    * @param {string} password - login password.
+   * @param {boolean} rejectUnauthorized - Use false for cert verification.
    */
-  constructor (url: string, user: string, password: string) {
+  constructor (url: string, user: string, password: string,
+    rejectUnauthorized: boolean = true) {
 
     this.url = url;
     this.user = user;
     this.password = password;
+    this.rejectUnauthorized = rejectUnauthorized;
     this.rpcid = 0;
     this.authid = null;
 
@@ -57,6 +61,7 @@ class Zabbix {
       'id': this.rpcid += 1,
       'uri': this.url,
       'auth': this.authid,
+      'rejectUnauthorized': this.rejectUnauthorized,
       method,
       params
     };
