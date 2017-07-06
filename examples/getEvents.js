@@ -39,6 +39,7 @@ zabbix.login()
     console.log(JSON.stringify(event, null, whiteSpaceCount));
 
   })
+  .then(() => zabbix.logout())
   .catch((reason) =>
     console.log(JSON.stringify(reason, null, whiteSpaceCount))
   );
