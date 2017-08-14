@@ -9,7 +9,7 @@ class Zabbix {
   url: string
   user: string
   password: string
-  rejectUnauthorized: boolean
+  options: {}
   rpcid: number
   authid: string | null
 
@@ -19,15 +19,15 @@ class Zabbix {
    * @param {string} url - Zabbix API endpoint.
    * @param {string} user - login name.
    * @param {string} password - login password.
-   * @param {boolean} rejectUnauthorized - Use false for cert verification.
+   * @param {Object} options - specify request options.
+   * Link: https://github.com/request/request#requestoptions-callback
    */
-  constructor (url: string, user: string, password: string,
-    rejectUnauthorized: boolean = true) {
+  constructor (url: string, user: string, password: string, options: {} = {}) {
 
     this.url = url;
     this.user = user;
     this.password = password;
-    this.rejectUnauthorized = rejectUnauthorized;
+    this.options = options;
     this.rpcid = 0;
     this.authid = null;
 
@@ -61,7 +61,7 @@ class Zabbix {
       'id': this.rpcid += 1,
       'uri': this.url,
       'auth': this.authid,
-      'rejectUnauthorized': this.rejectUnauthorized,
+      'options': this.options,
       method,
       params
     };
