@@ -13,7 +13,7 @@ module.exports = {
    */
   'post': (opts: {|
       uri: string,
-      rejectUnauthorized: boolean,
+      options: {},
       id: number,
       auth: string | null,
       method: string,
@@ -25,7 +25,6 @@ module.exports = {
       'uri': opts.uri,
       'json': true,
       'gzip': true,
-      'rejectUnauthorized': opts.rejectUnauthorized,
       'simple': false,
       'resolveWithFullResponse': true,
       'body': {
@@ -37,7 +36,7 @@ module.exports = {
       }
     };
 
-    return rp.post(options);
+    return rp.post(Object.assign(options, opts.options));
 
   }
 };
