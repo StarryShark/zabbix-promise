@@ -1,8 +1,8 @@
 // @flow
 
 const req = require('./wrapper');
+const debug = require('debug')('api');
 
-const HTTPOK = 200;
 
 class Zabbix {
 
@@ -33,28 +33,6 @@ class Zabbix {
 
   } // eslint: constructor
 
-  static reqValidation (value) {
-
-    return new Promise((resolve, reject) => {
-
-      const {result} = value.body;
-
-      if (value.statusCode === HTTPOK && result) {
-
-        resolve(result);
-
-      } else {
-
-        reject(result);
-
-      }
-
-
-    });
-
-
-  } // eslint: reqValidation
-
   request (method: string, params: {} | []) {
 
     const opts = {
@@ -67,7 +45,19 @@ class Zabbix {
     };
 
     return req.post(opts)
-      .then((value) => this.constructor.reqValidation(value));
+      .then((value) => {
+
+        debug('HTTP response: %o', value);
+
+        if (!Object.prototype.hasOwnProperty.call(value, 'result')) {
+
+          throw new Error(value);
+
+        }
+
+        return value.result;
+
+      });
 
   } // eslint: request
 
@@ -85,14 +75,8 @@ class Zabbix {
     })
       .then((value) => {
 
-        if (typeof value === 'string' || value instanceof String) {
-
-          this.authid = value;
-          return value;
-
-        }
-
-        throw value;
+        this.authid = value;
+        return value;
 
       });
 
@@ -109,14 +93,8 @@ class Zabbix {
     return this.request('user.logout', [])
       .then((value) => {
 
-        if (typeof value === 'boolean' && value) {
-
-          this.authid = null;
-          return value;
-
-        }
-
-        throw value;
+        this.authid = null;
+        return value;
 
       });
 

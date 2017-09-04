@@ -1,6 +1,7 @@
 // @flow
 
 const rp = require('request-promise-native');
+const debug = require('debug')('wrapper');
 
 module.exports = {
 
@@ -20,13 +21,10 @@ module.exports = {
       params: {} | []
     |}) => {
 
-    const options = {
-      'method': 'POST',
+    let options = {
       'uri': opts.uri,
       'json': true,
       'gzip': true,
-      'simple': false,
-      'resolveWithFullResponse': true,
       'body': {
         'jsonrpc': '2.0',
         'id': opts.id,
@@ -36,7 +34,11 @@ module.exports = {
       }
     };
 
-    return rp.post(Object.assign(options, opts.options));
+    options = Object.assign(options, opts.options);
+
+    debug('HTTP POST Options: %o', options);
+
+    return rp.post(options);
 
   }
 };
