@@ -1,8 +1,7 @@
 // @flow
 
 const Zabbix = require('./api');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const {exec} = require('child_process');
 
 class Client extends Zabbix {
 
@@ -56,10 +55,30 @@ class Client extends Zabbix {
       .then((val) => {
 
         const {path, server, port, host, values} = val;
-        return exec(`printf -- '${values}' | ${path} -vv -z ${server} ` +
-          `-p ${port} -s ${host} -r -i -`);
 
-      });
+        return new Promise((resolve, reject) => {
+
+          let cmd = `printf -- '${values}' | ${path} -vv -z ${server} `;
+          cmd += `-p ${port} -s ${host} -r -i -`;
+
+          exec(cmd, (error, stdout, stderr) => {
+
+            if (error) {
+
+              return reject(error);
+
+            }
+
+            return resolve({
+              stdout,
+              stderr
+            });
+
+          }); // eslint: exec
+
+        }); // eslint: promise
+
+      }); // eslint: then
 
 
   } // eslint: sender
