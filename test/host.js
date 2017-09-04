@@ -62,12 +62,12 @@ describe('host actions:', () => {
 
   });
 
-  it(`update host ${hosts[0].name}`, () => expect(
-    zabbix.request('host.update', {
-      'hostid': hosts[0].id,
-      'templates': [{'templateid': hosts[0].tid}],
-      'inventory_mode': 1
-    })).to.be.fulfilled.and.to.eventually.be.an('Object'));
+  // eslint-disable-next-line max-len
+  it(`update host ${hosts[0].name}`, () => expect(zabbix.request('host.update', {
+    'hostid': hosts[0].id,
+    'templates': [{'templateid': hosts[0].tid}],
+    'inventory_mode': 1
+  })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
   it(`get host ${hosts[0].name}`, () => expect(zabbix.request('host.get', {
     'output': [
@@ -77,16 +77,17 @@ describe('host actions:', () => {
     'hostids': hosts[0].id
   })).to.be.fulfilled.and.to.eventually.be.an('Array'));
 
-  it(`add template to ${hosts[1].name}, ${hosts[2].name}`, () => expect(
-    zabbix.request('host.massadd', {
-      'hosts': [
-        {'hostid': hosts[1].id},
-        {'hostid': hosts[2].id}
-      ],
-      'templates': [{'templateid': hosts[1].tid}]
-    })).to.be.fulfilled.and.to.eventually.be.an('Object'));
+  // eslint-disable-next-line max-len
+  it(`add template to ${hosts[1].name}, ${hosts[2].name}`, () => expect(zabbix.request('host.massadd', {
+    'hosts': [
+      {'hostid': hosts[1].id},
+      {'hostid': hosts[2].id}
+    ],
+    'templates': [{'templateid': hosts[1].tid}]
+  })).to.be.fulfilled.and.to.eventually.be.an('Object'));
 
-  it(`update inventory contact ${hosts[1].name}, ${hosts[2].name}`,
+  it(
+    `update inventory contact ${hosts[1].name}, ${hosts[2].name}`,
     () => expect(zabbix.request('host.massupdate', {
       'hosts': [
         {'hostid': hosts[1].id},
@@ -94,22 +95,25 @@ describe('host actions:', () => {
       ],
       'inventory': {'contact': 'Sumit Goel'},
       'inventory_mode': 1
-    })).to.be.fulfilled.and.to.eventually.be.an('Object'));
+    })).to.be.fulfilled.and.to.eventually.be.an('Object')
+  );
 
-  it(`unlink and clear template from ${hosts[1].name}, ${hosts[2].name}`,
+  it(
+    `unlink and clear template from ${hosts[1].name}, ${hosts[2].name}`,
     () => expect(zabbix.request('host.massremove', {
       'hostids': [
         hosts[1].id,
         hosts[2].id
       ],
       'templateids_clear': hosts[1].tid
-    })).to.be.fulfilled.and.to.eventually.be.an('Object'));
+    })).to.be.fulfilled.and.to.eventually.be.an('Object')
+  );
 
   hosts.forEach((host) => {
 
-    it(`delete host ${host.name}`, () => expect(
-      zabbix.request('host.delete', [host.id]))
-      .to.be.fulfilled.and.to.eventually.be.an('Object'));
+    // eslint-disable-next-line max-len
+    it(`delete host ${host.name}`, () => expect(zabbix.request('host.delete', [host.id])).to.be.fulfilled.and
+      .to.eventually.be.an('Object'));
 
   });
 
