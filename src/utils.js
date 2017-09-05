@@ -2,6 +2,7 @@
 
 const Zabbix = require('./api');
 const {exec} = require('child_process');
+const debug = require('debug')('utils');
 
 class Client extends Zabbix {
 
@@ -57,6 +58,8 @@ class Client extends Zabbix {
         const {path, server, port, host, values} = val;
 
         return new Promise((resolve, reject) => {
+
+          debug('zabbix_sender options: %O', val);
 
           let cmd = `printf -- '${values}' | ${path} -vv -z ${server} `;
           cmd += `-p ${port} -s ${host} -r -i -`;
