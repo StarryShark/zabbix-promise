@@ -1,15 +1,15 @@
 // @flow
 
 const req = require('./wrapper');
+const debug = require('debug')('api');
 
-const HTTPOK = 200;
 
 class Zabbix {
 
   url: string
   user: string
   password: string
-  rejectUnauthorized: boolean
+  options: {}
   rpcid: number
   authid: string | null
 
@@ -19,41 +19,19 @@ class Zabbix {
    * @param {string} url - Zabbix API endpoint.
    * @param {string} user - login name.
    * @param {string} password - login password.
-   * @param {boolean} rejectUnauthorized - Use false for cert verification.
+   * @param {Object} options - specify request options.
+   * Link: https://github.com/request/request#requestoptions-callback
    */
-  constructor (url: string, user: string, password: string,
-    rejectUnauthorized: boolean = true) {
+  constructor (url: string, user: string, password: string, options: {} = {}) {
 
     this.url = url;
     this.user = user;
     this.password = password;
-    this.rejectUnauthorized = rejectUnauthorized;
+    this.options = options;
     this.rpcid = 0;
     this.authid = null;
 
   } // eslint: constructor
-
-  static reqValidation (value) {
-
-    return new Promise((resolve, reject) => {
-
-      const {result} = value.body;
-
-      if (value.statusCode === HTTPOK && result) {
-
-        resolve(result);
-
-      } else {
-
-        reject(result);
-
-      }
-
-
-    });
-
-
-  } // eslint: reqValidation
 
   request (method: string, params: {} | []) {
 
@@ -61,13 +39,25 @@ class Zabbix {
       'id': this.rpcid += 1,
       'uri': this.url,
       'auth': this.authid,
-      'rejectUnauthorized': this.rejectUnauthorized,
+      'options': this.options,
       method,
       params
     };
 
     return req.post(opts)
-      .then((value) => this.constructor.reqValidation(value));
+      .then((value) => {
+
+        debug('HTTP response: %o', value);
+
+        if (!Object.prototype.hasOwnProperty.call(value, 'result')) {
+
+          throw new Error(value);
+
+        }
+
+        return value.result;
+
+      });
 
   } // eslint: request
 
@@ -85,14 +75,8 @@ class Zabbix {
     })
       .then((value) => {
 
-        if (typeof value === 'string' || value instanceof String) {
-
-          this.authid = value;
-          return value;
-
-        }
-
-        throw value;
+        this.authid = value;
+        return value;
 
       });
 
@@ -109,14 +93,8 @@ class Zabbix {
     return this.request('user.logout', [])
       .then((value) => {
 
-        if (typeof value === 'boolean' && value) {
-
-          this.authid = null;
-          return value;
-
-        }
-
-        throw value;
+        this.authid = null;
+        return value;
 
       });
 

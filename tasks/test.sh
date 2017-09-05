@@ -4,9 +4,22 @@ set -ev
 
 export PATH="./node_modules/.bin:$PATH"
 
+DIR=$(pwd)
+
+# Uncomment the below lines to regenerate the self signed certificates
+#
+# cd "$DIR"/tasks/ssl
+# rm -f ./*
+# openssl req -out ssl.csr -new -newkey rsa:2048 -nodes -keyout ssl.key -subj "/C=US/ST=California/L=San Francisco/O=sumitgoelpw/OU=zabbix-promise/CN=zabbix-web.local/emailAddress=email@example.com"
+# openssl x509 -req -sha256 -days 365 -in ssl.csr -signkey ssl.key -out ssl.crt
+# openssl dhparam -out dhparam.pem 2048
+# cd "$DIR"
+
 export DBUSER='postgres'
 export DBPASS='postgres'
 export HOSTPORT='8080'
+export HOSTPORTSSL='8443'
+export NGINXDIRSSL="$DIR/tasks/ssl"
 
 # linting check
 eslint .

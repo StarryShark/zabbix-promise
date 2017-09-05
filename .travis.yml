@@ -20,8 +20,7 @@ install:
   - npm install
 
 script:
-  - shellcheck -s bash -Calways ./tasks/test.sh
-  - bash ./tasks/test.sh
+  - npm test
 
 matrix:
   fast_finish: true
