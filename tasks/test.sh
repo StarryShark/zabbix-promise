@@ -42,6 +42,3 @@ do
 
   docker-compose -p "$VAR" down
 done
-
-# vulnerability scanner
-nsp check
