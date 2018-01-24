@@ -1,5 +1,3 @@
-/* eslint-disable no-process-env */
-
 const Zabbix = require('../index');
 
 const whiteSpaceCount = 2;
@@ -26,19 +24,14 @@ const zabbix = new Zabbix(
 zabbix.login()
   .then(() => zabbix.request('event.get', getEventParams))
   .then((value) => {
-
     event.unack = value;
     getEventParams.acknowledged = true;
 
     return zabbix.request('event.get', getEventParams);
-
   })
   .then((value) => {
-
     event.ack = value;
     console.log(JSON.stringify(event, null, whiteSpaceCount));
-
   })
   .then(() => zabbix.logout())
-  .catch((reason) =>
-    console.log(JSON.stringify(reason, null, whiteSpaceCount)));
+  .catch((reson) => console.log(JSON.stringify(reson, null, whiteSpaceCount)));

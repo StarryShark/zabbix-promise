@@ -12,7 +12,6 @@ const zabbix = new Zabbix(
 chai.use(chaiAsPromised);
 
 describe('host actions:', () => {
-
   const hosts = [
     {
       'name': 'zabbix-agent1',
@@ -38,7 +37,6 @@ describe('host actions:', () => {
     .and.to.eventually.be.a('string'));
 
   hosts.forEach((host) => {
-
     it(`create host ${host.name}`, () => expect(zabbix.request('host.create', {
       'host': host.name,
       'groups': [{'groupid': host.gid}],
@@ -53,13 +51,10 @@ describe('host actions:', () => {
         }
       ]
     }).then((value) => {
-
       [host.id] = value.hostids;
 
       return value;
-
     })).to.be.fulfilled.and.to.eventually.be.an('Object'));
-
   });
 
   // eslint-disable-next-line max-len
@@ -110,14 +105,11 @@ describe('host actions:', () => {
   );
 
   hosts.forEach((host) => {
-
     // eslint-disable-next-line max-len
     it(`delete host ${host.name}`, () => expect(zabbix.request('host.delete', [host.id])).to.be.fulfilled.and
       .to.eventually.be.an('Object'));
-
   });
 
   it('logout', () => expect(zabbix.logout()).to.be.fulfilled
     .and.to.eventually.be.a('boolean'));
-
 });
