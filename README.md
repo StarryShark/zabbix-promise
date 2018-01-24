@@ -18,3 +18,4 @@ ES2015 native promises.
 - [getHost](examples/getHost.js)
 - [createHost](examples/createHost.js)
 - [getEvents](examples/getEvents.js)
+- [sendValues](examples/sendValues.js)
