@@ -32,6 +32,7 @@ zabbix.login()
   .then((value) => {
     event.ack = value;
     console.log(JSON.stringify(event, null, whiteSpaceCount));
+    return value;
   })
   .then(() => zabbix.logout())
   .catch((reson) => console.log(JSON.stringify(reson, null, whiteSpaceCount)));
