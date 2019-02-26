@@ -22,7 +22,7 @@ export HOSTPORTSSL='8443'
 export NGINXDIRSSL="$DIR/tasks/ssl"
 
 # linting check
-eslint .
+standard
 
 # run tests for zabbix
 for VAR in 'alpine-3.0-latest' 'alpine-3.2-latest'

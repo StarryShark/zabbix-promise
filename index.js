@@ -4,4 +4,4 @@
  * @license MIT
  * @author Sumit Goel
  */
-module.exports = require('./lib/utils');
+module.exports = require('./lib/utils')

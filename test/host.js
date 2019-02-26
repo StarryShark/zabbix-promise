@@ -1,15 +1,17 @@
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-const Zabbix = require('../index');
+/* eslint-env mocha */
 
-const {expect} = chai;
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+const Zabbix = require('../index')
+
+const { expect } = chai
 const zabbix = new Zabbix(
   'https://127.0.0.1:8443/api_jsonrpc.php',
   'Admin',
-  'zabbix', {'rejectUnauthorized': false}
-);
+  'zabbix', { 'rejectUnauthorized': false }
+)
 
-chai.use(chaiAsPromised);
+chai.use(chaiAsPromised)
 
 describe('host actions:', () => {
   const hosts = [
@@ -31,15 +33,15 @@ describe('host actions:', () => {
       'gid': '2',
       'tid': '10001'
     }
-  ];
+  ]
 
   it('login', () => expect(zabbix.login()).to.be.fulfilled
-    .and.to.eventually.be.a('string'));
+    .and.to.eventually.be.a('string'))
 
   hosts.forEach((host) => {
     it(`create host ${host.name}`, () => expect(zabbix.request('host.create', {
       'host': host.name,
-      'groups': [{'groupid': host.gid}],
+      'groups': [{ 'groupid': host.gid }],
       'interfaces': [
         {
           'dns': host.name,
@@ -51,18 +53,18 @@ describe('host actions:', () => {
         }
       ]
     }).then((value) => {
-      [host.id] = value.hostids;
+      [host.id] = value.hostids
 
-      return value;
-    })).to.be.fulfilled.and.to.eventually.be.an('Object'));
-  });
+      return value
+    })).to.be.fulfilled.and.to.eventually.be.an('Object'))
+  })
 
   // eslint-disable-next-line max-len
   it(`update host ${hosts[0].name}`, () => expect(zabbix.request('host.update', {
     'hostid': hosts[0].id,
-    'templates': [{'templateid': hosts[0].tid}],
+    'templates': [{ 'templateid': hosts[0].tid }],
     'inventory_mode': 1
-  })).to.be.fulfilled.and.to.eventually.be.an('Object'));
+  })).to.be.fulfilled.and.to.eventually.be.an('Object'))
 
   it(`get host ${hosts[0].name}`, () => expect(zabbix.request('host.get', {
     'output': [
@@ -70,28 +72,28 @@ describe('host actions:', () => {
       'host'
     ],
     'hostids': hosts[0].id
-  })).to.be.fulfilled.and.to.eventually.be.an('Array'));
+  })).to.be.fulfilled.and.to.eventually.be.an('Array'))
 
   // eslint-disable-next-line max-len
   it(`add template to ${hosts[1].name}, ${hosts[2].name}`, () => expect(zabbix.request('host.massadd', {
     'hosts': [
-      {'hostid': hosts[1].id},
-      {'hostid': hosts[2].id}
+      { 'hostid': hosts[1].id },
+      { 'hostid': hosts[2].id }
     ],
-    'templates': [{'templateid': hosts[1].tid}]
-  })).to.be.fulfilled.and.to.eventually.be.an('Object'));
+    'templates': [{ 'templateid': hosts[1].tid }]
+  })).to.be.fulfilled.and.to.eventually.be.an('Object'))
 
   it(
     `update inventory contact ${hosts[1].name}, ${hosts[2].name}`,
     () => expect(zabbix.request('host.massupdate', {
       'hosts': [
-        {'hostid': hosts[1].id},
-        {'hostid': hosts[2].id}
+        { 'hostid': hosts[1].id },
+        { 'hostid': hosts[2].id }
       ],
-      'inventory': {'contact': 'Sumit Goel'},
+      'inventory': { 'contact': 'Sumit Goel' },
       'inventory_mode': 1
     })).to.be.fulfilled.and.to.eventually.be.an('Object')
-  );
+  )
 
   it(
     `unlink and clear template from ${hosts[1].name}, ${hosts[2].name}`,
@@ -102,14 +104,14 @@ describe('host actions:', () => {
       ],
       'templateids_clear': hosts[1].tid
     })).to.be.fulfilled.and.to.eventually.be.an('Object')
-  );
+  )
 
   hosts.forEach((host) => {
     // eslint-disable-next-line max-len
     it(`delete host ${host.name}`, () => expect(zabbix.request('host.delete', [host.id])).to.be.fulfilled.and
-      .to.eventually.be.an('Object'));
-  });
+      .to.eventually.be.an('Object'))
+  })
 
   it('logout', () => expect(zabbix.logout()).to.be.fulfilled
-    .and.to.eventually.be.a('boolean'));
-});
+    .and.to.eventually.be.a('boolean'))
+})

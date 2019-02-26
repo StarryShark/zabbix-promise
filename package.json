@@ -6,7 +6,7 @@
   "scripts": {
     "cb": "checkbashisms ./tasks/test.sh; exit 0",
     "sc": "shellcheck -s bash -Calways ./tasks/test.sh",
-    "pretest": "npm run cb && npm run sc && nsp check",
+    "pretest": "npm run cb && npm run sc",
     "test": "bash ./tasks/test.sh",
     "up": "npm-check -u -E && rm -rf ./node_modules package-lock.json && npm i"
   },
@@ -27,24 +27,18 @@
   },
   "homepage": "https://github.com/sumitgoelpw/zabbix-promise#readme",
   "dependencies": {
-    "debug": "3.1.0",
-    "request": "2.85.0",
-    "request-promise-native": "1.0.5"
+    "debug": "4.1.1",
+    "request": "2.88.0",
+    "request-promise-native": "1.0.7"
   },
   "devDependencies": {
-    "chai": "4.1.2",
+    "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
-    "coveralls": "3.0.1",
-    "eslint": "4.19.1",
-    "eslint-config-sumitgoelpw": "1.1.0",
-    "eslint-plugin-promise": "3.7.0",
+    "coveralls": "3.0.3",
     "istanbul": "0.4.5",
-    "mocha": "5.1.1",
+    "mocha": "6.0.2",
     "mocha-lcov-reporter": "1.3.0",
-    "npm-check": "5.7.0",
-    "nsp": "3.2.1"
-  },
-  "eslintConfig": {
-    "extends": "sumitgoelpw"
+    "npm-check": "5.9.0",
+    "standard": "12.0.1"
   }
 }

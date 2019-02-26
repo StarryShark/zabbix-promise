@@ -1,4 +1,4 @@
-const zabbix = require('../index');
+const zabbix = require('../index')
 
 zabbix.sender({
   'path': '/usr/local/bin/zabbix_sender',
@@ -7,4 +7,4 @@ zabbix.sender({
   'values': '- testing 444\n- testing 111\n'
 })
   .then((value) => console.log(value))
-  .catch((reason) => console.log(reason));
+  .catch((reason) => console.log(reason))
