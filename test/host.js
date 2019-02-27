@@ -6,9 +6,9 @@ const Zabbix = require('../index')
 
 const { expect } = chai
 const zabbix = new Zabbix(
-  'https://127.0.0.1:8443/api_jsonrpc.php',
+  'http://127.0.0.1:8080/api_jsonrpc.php',
   'Admin',
-  'zabbix', { 'rejectUnauthorized': false }
+  'zabbix'
 )
 
 chai.use(chaiAsPromised)

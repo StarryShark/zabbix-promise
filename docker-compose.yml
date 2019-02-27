@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   zabbix-database:
       hostname: zabbix-database.local
@@ -13,21 +13,20 @@ services:
         DB_SERVER_HOST: zabbix-database
         POSTGRES_USER: ${DBUSER}
         POSTGRES_PASSWORD: ${DBPASS}
+        POSTGRES_DB: ${DBUSER}
       depends_on:
         - zabbix-database
   zabbix-web:
     hostname: zabbix-web.local
     image: zabbix/zabbix-web-nginx-pgsql:${ZABTAG}
-    volumes:
-      - ${NGINXDIRSSL}:/etc/ssl/nginx
     ports:
       - 0.0.0.0:${HOSTPORT}:80/tcp
-      - 0.0.0.0:${HOSTPORTSSL}:443/tcp
     environment:
       ZBX_SERVER_HOST: zabbix-server
       DB_SERVER_HOST: zabbix-database
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASSWORD: ${DBPASS}
+      POSTGRES_DB: ${DBUSER}
       TZ: GMT
     depends_on:
       - zabbix-server
