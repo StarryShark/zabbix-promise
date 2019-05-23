@@ -3,8 +3,6 @@ services:
   zabbix-database:
       hostname: zabbix-database.local
       image: postgres:alpine
-      ports:
-        - 0.0.0.0:5432:5432/tcp
       environment:
         POSTGRES_USER: ${DBUSER}
         POSTGRES_PASSWORD: ${DBPASS}
