@@ -15,7 +15,7 @@ for VAR in 'alpine-3.0-latest' 'alpine-4.0-latest' 'alpine-4.2-latest'
 do
   export ZABTAG="$VAR"
 
-  printf "\n>>> Building Zabbix %s conatiners.\n\n" "$VAR"
+  printf '\n>>> Building Zabbix %s conatiners.\n\n' "$VAR"
   docker-compose -p "$VAR" up -d
   printf '\n' && sleep 2
   docker-compose -p "$VAR" ps
