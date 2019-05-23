@@ -1,20 +1,29 @@
+/**
+ * In this example, we will query Zabbix hosts and apply a filter for host
+ * "zabbix-promise-host" and include the interfaces as well.
+ */
+
 const Zabbix = require('../index')
 
-const whiteSpaceCount = 2
-const zabbix = new Zabbix(
-  'http://127.0.0.1:8080/api_jsonrpc.php',
-  'Admin',
-  'zabbix'
-)
+const zabbix = new Zabbix({
+  url: 'http://127.0.0.1:8080/api_jsonrpc.php',
+  user: 'Admin',
+  password: 'zabbix'
+})
 
-zabbix.login()
-  .then(() => zabbix.request('host.get', {
-    'output': [
-      'hostid',
-      'host'
-    ],
-    'limit': 1
-  }))
-  .then((value) => console.log(JSON.stringify(value, null, whiteSpaceCount)))
-  .then(() => zabbix.logout())
-  .catch((reson) => console.log(JSON.stringify(reson, null, whiteSpaceCount)))
+const main = async () => {
+  try {
+    await zabbix.login()
+    const hosts = await zabbix.request('host.get', {
+      selectInterfaces: 'extend',
+      filter: {
+        host: 'zabbix-promise-host'
+      }
+    })
+    console.log(JSON.stringify(hosts, null, 2))
+    zabbix.logout()
+  } catch (error) {
+    console.error(error)
+  }
+}
+main()

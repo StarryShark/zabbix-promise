@@ -3,12 +3,16 @@ services:
   zabbix-database:
       hostname: zabbix-database.local
       image: postgres:alpine
+      ports:
+        - 0.0.0.0:5432:5432/tcp
       environment:
         POSTGRES_USER: ${DBUSER}
         POSTGRES_PASSWORD: ${DBPASS}
   zabbix-server:
       hostname: zabbix-server.local
       image: zabbix/zabbix-server-pgsql:${ZABTAG}
+      ports:
+        - 0.0.0.0:10051:10051/tcp
       environment:
         DB_SERVER_HOST: zabbix-database
         POSTGRES_USER: ${DBUSER}
@@ -20,7 +24,8 @@ services:
     hostname: zabbix-web.local
     image: zabbix/zabbix-web-nginx-pgsql:${ZABTAG}
     ports:
-      - 0.0.0.0:${HOSTPORT}:80/tcp
+      - 0.0.0.0:8080:80/tcp
+      - 0.0.0.0:8443:443/tcp
     environment:
       ZBX_SERVER_HOST: zabbix-server
       DB_SERVER_HOST: zabbix-database
@@ -31,27 +36,3 @@ services:
     depends_on:
       - zabbix-server
       - zabbix-database
-  zabbix-agent1:
-    hostname: zabbix-agent1.local
-    image: zabbix/zabbix-agent:${ZABTAG}
-    environment:
-      ZBX_HOSTNAME: zabbix-agent1
-      ZBX_SERVER_HOST: zabbix-server
-    depends_on:
-      - zabbix-server
-  zabbix-agent2:
-    hostname: zabbix-agent2.local
-    image: zabbix/zabbix-agent:${ZABTAG}
-    environment:
-      ZBX_HOSTNAME: zabbix-agent2
-      ZBX_SERVER_HOST: zabbix-server
-    depends_on:
-      - zabbix-server
-  zabbix-agent3:
-    hostname: zabbix-agent3.local
-    image: zabbix/zabbix-agent:${ZABTAG}
-    environment:
-      ZBX_HOSTNAME: zabbix-agent3
-      ZBX_SERVER_HOST: zabbix-server
-    depends_on:
-      - zabbix-server
