@@ -8,8 +8,13 @@
     "sc": "shellcheck -s bash -Calways ./tasks/test.sh",
     "pretest": "npm run cb && npm run sc",
     "test": "bash ./tasks/test.sh",
+    "docs": "",
     "up": "rm -rf ./node_modules package-lock.json && npm i"
   },
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sumitgoelpw/zabbix-promise.git"
