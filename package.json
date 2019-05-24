@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/sumitgoelpw/zabbix-promise#readme",
   "devDependencies": {
+    "jsdoc": "*",
+    "nock": "*",
     "standard": "*",
     "tap": "*"
   }
