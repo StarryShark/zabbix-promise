@@ -6,6 +6,21 @@ Zabbix is an open source monitoring software that can monitor pretty much everyt
 
 The latest version of zabbix-promise supports all currently maintained Node versions, see [Node Release Schedule](https://github.com/nodejs/Release#release-schedule) and all currently supported Zabbix releases, see [Zabbix Life Cycle & Release Policy](https://www.zabbix.com/life_cycle_and_release_policy).
 
+**Table of Contents**
+
+<!-- toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+  - [getHost](examples/getHost.js)
+  - [createHost](examples/createHost.js)
+  - [zabbixSender](examples/zabbixSender.js)
+- [Debugging](#debugging)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- tocstop -->
+
 ## Install
 
 ```js
