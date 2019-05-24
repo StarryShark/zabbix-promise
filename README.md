@@ -8,7 +8,9 @@ The latest version of zabbix-promise supports all currently maintained Node vers
 
 ## Install
 
-`npm install zabbix-promise --save`
+```js
+$ npm install zabbix-promise --save
+```
 
 ## Usage
 
