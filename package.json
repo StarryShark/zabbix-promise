@@ -8,7 +8,7 @@
     "sc": "shellcheck -s bash -Calways ./tasks/test.sh",
     "pretest": "npm run cb && npm run sc",
     "test": "bash ./tasks/test.sh",
-    "docs": "",
+    "jsdoc": "jsdoc -d docs -R README.md lib && open docs/index.html",
     "up": "rm -rf ./node_modules package-lock.json && npm i"
   },
   "files": [

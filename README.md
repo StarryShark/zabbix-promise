@@ -42,11 +42,11 @@ const zabbix = new Zabbix({
 const main = async () => {
   try {
     await zabbix.login()
-    const hosts = await zabbix.request('host.get', {
+    const host = await zabbix.request('host.get', {
       selectInterfaces: 'extend',
       limit: 1
     })
-    console.log(JSON.stringify(hosts, null, 2))
+    console.log(JSON.stringify(host, null, 2))
     zabbix.logout()
   } catch (error) {
     console.error(error)
