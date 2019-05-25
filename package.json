@@ -36,5 +36,10 @@
     "nock": "*",
     "standard": "*",
     "tap": "*"
+  },
+  "standard": {
+    "ignore": [
+      "docs"
+    ]
   }
 }
