@@ -12,9 +12,10 @@ The latest version of zabbix-promise supports all currently maintained Node vers
 
 - [Install](#install)
 - [Usage](#usage)
-  - [getHost](examples/getHost.js)
-  - [createHost](examples/createHost.js)
-  - [zabbixSender](examples/zabbixSender.js)
+  - [Examples](#examples)
+    - [getHost](examples/getHost.js)
+    - [createHost](examples/createHost.js)
+    - [zabbixSender](examples/zabbixSender.js)
 - [Debugging](#debugging)
 - [Contributing](#contributing)
 - [License](#license)
@@ -28,6 +29,33 @@ $ npm install zabbix-promise --save
 ```
 
 ## Usage
+
+```js
+const Zabbix = require('zabbix-promise')
+
+const zabbix = new Zabbix({
+  url: 'http://127.0.0.1:8080/api_jsonrpc.php',
+  user: 'Admin',
+  password: 'zabbix'
+})
+
+const main = async () => {
+  try {
+    await zabbix.login()
+    const host = await zabbix.request('host.get', {
+      selectInterfaces: 'extend',
+      limit: 1
+    })
+    console.log(JSON.stringify(host, null, 2))
+    zabbix.logout()
+  } catch (error) {
+    console.error(error)
+  }
+}
+main()
+```
+
+### Examples
 
 Please check the examples below to get started.
 
