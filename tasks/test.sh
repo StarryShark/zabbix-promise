@@ -11,7 +11,7 @@ export DBPASS='postgres'
 standard
 
 # TODO - remove
-PKGVERSION=$(jq .version package.json)
+PKGVERSION=$(jq .version package.json | tr -d '"')
 PKGNPMVERSION=$(npm show zabbix-promise version)
 echo "$PKGVERSION"
 echo "$PKGNPMVERSION"
