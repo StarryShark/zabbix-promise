@@ -11,8 +11,14 @@ export DBPASS='postgres'
 standard
 
 # TODO - remove
-ls -la
-git branch
+PKGVERSION=$(jq .version package.json)
+PKGNPMVERSION=$(npm show zabbix-promise version)
+echo "$PKGVERSION"
+echo "$PKGNPMVERSION"
+if [ "$PKGVERSION" = "$PKGNPMVERSION" ]; then
+  printf 'You need to bump up the version in package.json'
+  exit 1
+fi
 exit 0
 
 # run tests for zabbix
