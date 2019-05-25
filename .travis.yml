@@ -15,6 +15,7 @@ addons:
   apt:
     packages:
       - shellcheck
+      - devscripts
 
 install:
   - npm install
