@@ -39,6 +39,7 @@ before_deploy:
     export TRAVIS_TAG=$(jq .version package.json | tr -d '"')
     git tag "v$TRAVIS_TAG"
   fi
+- cat ~/.npmrc || exit 0
 
 deploy:
 - provider: releases
