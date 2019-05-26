@@ -20,8 +20,6 @@ if [ "$PKGVERSION" = "$PKGNPMVERSION" ]; then
   exit 1
 fi
 
-exit 0
-
 # run tests for zabbix
 for VAR in 'alpine-3.0-latest' 'alpine-4.0-latest' 'alpine-4.2-latest'
 do
