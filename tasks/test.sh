@@ -10,6 +10,9 @@ export DBPASS='postgres'
 # linting check
 standard
 
+checkbashisms ./tasks/deploy.sh; exit 0
+shellcheck -s bash -Calways ./tasks/deploy.sh
+
 # Ensure to bump up the version in package.json
 PKGVERSION=$(jq .version package.json | tr -d '"')
 PKGNPMVERSION=$(npm show zabbix-promise version)
