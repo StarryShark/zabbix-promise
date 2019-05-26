@@ -35,14 +35,19 @@ before_deploy:
 - git config --local user.name "$github_username"
 - git config --local user.email "$github_email"
 - export TRAVIS_TAG=$(jq .version package.json | tr -d '"')
-- git tag $TRAVIS_TAG
+- git tag "v$TRAVIS_TAG"
 
 deploy:
 - provider: releases
   api_key:
     secure: "$github_token"
-  file_glob: true
-  file: "**/*"
+  on:
+    repo: sumitgoelpw/zabbix-promise
+    branch: master
+    node: '8'
+- provider: npm
+  email: "$npm_email"
+  api_key: "npm_token"
   on:
     repo: sumitgoelpw/zabbix-promise
     branch: master
