@@ -1,38 +1,30 @@
 group: edge
 sudo: required
-
 language: node_js
 node_js:
 - '8'
 - '10'
 - '12'
-
 services:
 - docker
-
 addons:
   apt:
     packages:
     - shellcheck
     - devscripts
     - jq
-
 install:
 - npm install
-
 script:
 - npm test
-
 branches:
   only:
   - master
   - v1.x.x
-
 matrix:
   fast_finish: true
-
 before_deploy:
-- >
+- |
   if ! [ "$TRAVIS_TAG" ]; then
     git config --local user.name "${github_username:?}"
     git config --local user.email "${github_email:?}"
@@ -40,7 +32,6 @@ before_deploy:
     git tag "v$TRAVIS_TAG"
   fi
 - cat ~/.npmrc || exit 0
-
 deploy:
 - provider: releases
   api_key:
@@ -50,8 +41,9 @@ deploy:
     branch: master
     node: '8'
 - provider: npm
-  email: "$npm_email"
-  api_key: "npm_token"
+  email: sumit@goel.pw
+  api_key:
+    secure: PqfzMi51zWSbZBDeYAJzBIKiyBko9hpAmFag86SSw82DuprzJGW2dQQnSANHB4uKqaKvvrycyxy9Lck3a82rGObJaCAmSAhQSsD12IDXCuqc3QrdXd7pZhRGFHnngDd0jZgYLsqbLmQDh9w+UzPM4aNiy3xfKkQXxklH57Q18dGvnMG5YoQxqRDPeIB+os5AITC+MZlNw8v+spceNx3OkAlwyhGd6nSt5bTg6x5tbi2lUOw2nv0S2cHe0qROiC4U39nkmIE3wElA2l0FaA7TE3HR47GZo1sWGwZomtpRdUqLHUi7rx59jEgN57tvAKR5Fmy9M86H08ZPoaVz2ZKqHLZwOjn+56ZQnC2DMmXYF61E/qNm/WmRoesE0tNnLXsoMPo5svCtD9sCde/LGaKmfrAzrYccmcBMkIzfu4X6HCUmFvg1MgGxIdrzR+YE7sv9+B6UeYn/wxDceBr3o7gwyf5PgTvA4ILFgJtbz/GqPGqwdH7THwDnsyPKMQN5ddSR+O5d+VW8toRksKSro7dbuqzlGJBIM09USFPn533gCV28s6dK5n80KSkFjzVwEGEEvz8l3Uj/GiWz6smZYSrE2D5lUov/vFD/zCZZe3CjEnebeEbBAWufRjFtRuOpIgPv19vzHjD00J9Cjn7vykuk9py/QaI1b08sp8YGPpXVblk=
   on:
     repo: sumitgoelpw/zabbix-promise
     branch: master
