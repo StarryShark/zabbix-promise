@@ -26,6 +26,7 @@ script:
 branches:
   only:
   - master
+  - v1.x.x
 
 matrix:
   fast_finish: true
@@ -46,4 +47,3 @@ deploy:
     repo: sumitgoelpw/zabbix-promise
     branch: master
     node: '8'
-    tags: true
