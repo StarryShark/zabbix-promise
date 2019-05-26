@@ -32,7 +32,13 @@ matrix:
   fast_finish: true
 
 before_deploy:
-- bash ./tasks/deploy.sh
+- >
+  if ! [ "$TRAVIS_TAG" ]; then
+    git config --local user.name "${github_username:?}"
+    git config --local user.email "${github_email:?}"
+    export TRAVIS_TAG=$(jq .version package.json | tr -d '"')
+    git tag "v$TRAVIS_TAG"
+  fi
 
 deploy:
 - provider: releases
