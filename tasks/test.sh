@@ -10,6 +10,16 @@ export DBPASS='postgres'
 # linting check
 standard
 
+# Ensure to bump up the version in package.json
+PKGVERSION=$(jq .version package.json | tr -d '"')
+PKGNPMVERSION=$(npm show zabbix-promise version)
+echo "$PKGVERSION"
+echo "$PKGNPMVERSION"
+if [ "$PKGVERSION" = "$PKGNPMVERSION" ]; then
+  printf '\n>>>You need to bump up the version in package.json\n\n'
+  exit 1
+fi
+
 # run tests for zabbix
 for VAR in 'alpine-3.0-latest' 'alpine-4.0-latest' 'alpine-4.2-latest'
 do

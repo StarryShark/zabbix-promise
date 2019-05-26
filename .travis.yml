@@ -1,26 +1,49 @@
 group: edge
-
 sudo: required
 
 language: node_js
 node_js:
-  - "8"
-  - "10"
-  - "12"
+- '8'
+- '10'
+- '12'
 
 services:
-  - docker
+- docker
 
 addons:
   apt:
     packages:
-      - shellcheck
+    - shellcheck
+    - devscripts
+    - jq
 
 install:
-  - npm install
+- npm install
 
 script:
-  - npm test
+- npm test
+
+branches:
+  only:
+  - master
 
 matrix:
   fast_finish: true
+
+before_deploy:
+- git config --local user.name "Sumit Goel"
+- git config --local user.email "sumit@goel.pw"
+- export TRAVIS_TAG=$(jq .version package.json | tr -d '"')
+- git tag $TRAVIS_TAG
+
+deploy:
+- provider: releases
+  api_key:
+    secure: sLDAwzC89gIdDpXRA0JzTSQ2tkNS40vrn5gvU47MmsVnCG9IFLZFj/ZuNdslIevZ15Gh6KvWU1qIjRo+x6G6ohUIQ7ntHlzZh73YSfEGQ5/GjdBkWX1Cs36fqvvpC/17Gbp+TYRUQRMpG8nFFgOxR1FjKdIFAfx7D8jIkC5v3T6Wb8LkfTxIZgiYgXbgII3ApQVDcrvDRKn7ndOMNm4I0bF97kc+dStqONPZkReUckU0KHI5nvwTTK1jjphiwTAWy5i002ErWwW/tBHFXXSi57xR/5ikYZrrK4FO+6FShYAWVVKB8XKnEqEbmNQXVoFuI7ne8QcKnpRiwsqyyfT5hEh5gR12GPzoMRuHap6y1ZWAZKfTyoXZlsFtdHeJrOSK02uQ5Vkbm73nTvXNRoaKJLjyrbLHXAN7/0hpm/d5qr61Tty/tEi9L9TN0b8ELr6WrLVm3xnwQjb4QHCPu+lwAe5/qN8cUsG4CqCBCkIyGEW+2F4QcwDuIo7rPbdjk5YTxeoSRC0HhEvciXfBEP4oKOgW2DCLA+ORTuXQvMk/VRltRkO6OvllcdSRvQHwlWzwMeHmfFOA2pLXvCvfcnRfaGXlvUfkrjb5GqwaNjeN64VVQFLxtquDDmf8izbNawGO82lfRFBDKdK5XpYoiALhNLnfSClAKmzA9pQBKRlGd5Q=
+  file_glob: true
+  file: "**/*"
+  on:
+    repo: sumitgoelpw/zabbix-promise
+    branch: master
+    node: '8'
+    tags: true
