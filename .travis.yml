@@ -41,4 +41,5 @@ deploy:
   on:
     repo: sumitgoelpw/zabbix-promise
     branch: master
+    node: '8'
     tags: true
