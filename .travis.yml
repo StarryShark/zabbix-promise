@@ -23,6 +23,10 @@ install:
 script:
 - npm test
 
+branches:
+  only:
+  - master
+
 matrix:
   fast_finish: true
 
