@@ -1,6 +1,6 @@
 {
   "name": "zabbix-promise",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simplified Zabbix API Client",
   "main": "index.js",
   "scripts": {
